@@ -1,0 +1,30 @@
+{
+  "version": "2026-08-24.1",
+  "puzzles": [
+    {
+      "id": "small-things-001",
+      "title": "Small Things",
+      "date": "24 August 2026",
+      "author": "Made with love",
+      "note": "Five tiny words for a quiet little moment together.",
+      "completionMessage": "You make the ordinary feel like the best part of the day.",
+      "grid": ["STUNG", "TENOR", "UNTIE", "NOISE", "GREET"],
+      "clues": {
+        "across": {
+          "1": "Left smarting after meeting a bee",
+          "6": "Voice between baritone and alto",
+          "7": "Loosen, as a ribbon",
+          "8": "Sound you might ask a neighbour to keep down",
+          "9": "Welcome at the door"
+        },
+        "down": {
+          "1": "Felt the sharp end of a wasp",
+          "2": "Singing range above baritone",
+          "3": "Set a knot free",
+          "4": "A racket, but not the tennis kind",
+          "5": "Say hello to"
+        }
+      }
+    }
+  ]
+}
