@@ -8,7 +8,7 @@ The installed app and its crossword content are deliberately separate. The app c
 2. Give it a unique `id` and bump the top-level `version`.
 3. Commit and push to the `main` branch on GitHub. GitHub Pages republishes automatically. The new puzzle will appear the next time the app opens; no reinstall is required.
 
-Use `#` for a black square and capital letters for answer squares. Every grid row must have the same length. Clue keys use the standard crossword number calculated from the grid. The player supports any rectangular grid, Across and Down entries, touch and hardware keyboards, checks, reveals, progress saving, timing, and an archive.
+Use `#` for a black square and capital letters for answer squares. Every grid row must have the same length. Clue keys use the standard crossword number calculated from the grid. `enumerations` records each answer’s word lengths, such as `"5, 5"`. The player supports any rectangular connected grid, Across and Down entries, touch and hardware keyboards, whole-grid scoring without answer reveals, progress saving, timing, and an archive.
 
 ## Production architecture
 

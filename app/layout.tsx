@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { DM_Sans, Libre_Baskerville } from "next/font/google";
-import "./globals.css";
+import "./crossword.css";
 
 const dmSans = DM_Sans({
   variable: "--font-sans",
@@ -20,8 +20,8 @@ const socialImage = new URL(`${basePath}/og.png`, metadataBase.origin).toString(
 
 export const metadata: Metadata = {
     metadataBase,
-    title: "Srilatha's X Word — Made just for you",
-    description: "Srilatha's personal crossword app, made with love.",
+    title: "Srilatha's X Word — Handle with Urgent Care",
+    description: "Handle with Urgent Care · Puzzle No. 1, made just for Srilatha.",
     manifest: `${basePath}/manifest.webmanifest`,
     applicationName: "Srilatha's X Word",
     appleWebApp: {
@@ -38,16 +38,16 @@ export const metadata: Metadata = {
       apple: [{ url: `${basePath}/apple-touch-icon.png`, sizes: "180x180", type: "image/png" }],
     },
     openGraph: {
-      title: "Srilatha's X Word",
-      description: "A crossword, made just for you.",
+      title: "Handle with Urgent Care · Srilatha's X Word",
+      description: "Puzzle No. 1, made just for Srilatha.",
       type: "website",
       url: siteUrl,
-      images: [{ url: socialImage, width: 1536, height: 1024, alt: "Srilatha's X Word crossword app" }],
+      images: [{ url: socialImage, width: 1746, height: 901, alt: "Handle with Urgent Care — Srilatha's X Word, Puzzle No. 1" }],
     },
     twitter: {
       card: "summary_large_image",
-      title: "Srilatha's X Word",
-      description: "A crossword, made just for you.",
+      title: "Handle with Urgent Care · Srilatha's X Word",
+      description: "Puzzle No. 1, made just for Srilatha.",
       images: [socialImage],
     },
 };

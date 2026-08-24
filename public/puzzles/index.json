@@ -1,28 +1,60 @@
 {
-  "version": "2026-08-24.1",
+  "version": "2026-08-24.2",
   "puzzles": [
     {
-      "id": "small-things-001",
-      "title": "Small Things",
-      "date": "24 August 2026",
-      "author": "Made with love",
-      "note": "Five tiny words for a quiet little moment together.",
-      "completionMessage": "You make the ordinary feel like the best part of the day.",
-      "grid": ["STUNG", "TENOR", "UNTIE", "NOISE", "GREET"],
+      "id": "handle-with-urgent-care-001",
+      "number": 1,
+      "title": "Handle with Urgent Care",
+      "date": "Puzzle No. 1",
+      "author": "Made for Srilatha",
+      "note": "Ten clues. Every one comes with a story.",
+      "completionMessage": "Discharged with full marks. You handled that with care. ♥",
+      "grid": [
+        "#############S#P",
+        "#####SUPERFICIAL",
+        "#M###########M#A",
+        "#I#F##P######P#T",
+        "#S#A##I###K##L#O",
+        "#T#C##Z###E##Y##",
+        "#B#U##Z###V##C##",
+        "WORLDWARSNAPBOX#",
+        "#R#T######L##O##",
+        "#N#Y######B##K##",
+        "##########H##I##",
+        "#CAMBRIDGEAVENUE",
+        "##########T##G##",
+        "###PREGNANT#####"
+      ],
       "clues": {
         "across": {
-          "1": "Left smarting after meeting a bee",
-          "6": "Voice between baritone and alto",
-          "7": "Loosen, as a ribbon",
-          "8": "Sound you might ask a neighbour to keep down",
-          "9": "Welcome at the door"
+          "3": "Ironically, her imitation of this word lacks depth",
+          "8": "Apparently, soldiers ate from these between battles",
+          "9": "Our own little bit of university town, nowhere near the university",
+          "10": "Apparently a possible explanation for any bodily sensation whatsoever"
         },
         "down": {
-          "1": "Felt the sharp end of a wasp",
-          "2": "Singing range above baritone",
-          "3": "Set a knot free",
-          "4": "A racket, but not the tennis kind",
-          "5": "Say hello to"
+          "1": "The culinary channel from a parallel universe",
+          "2": "He turned ‘because the gods said so’ into a 2,400-year argument",
+          "4": "A shared journey beneath a red sun",
+          "5": "A place where intelligence is both the product and the prerequisite",
+          "6": "Three weeks proved there really can be too much of a good thing",
+          "7": "Dad’s unexpected contribution to the priesthood"
+        }
+      },
+      "enumerations": {
+        "across": {
+          "3": "11",
+          "8": "5, 3, 4, 3",
+          "9": "9, 6",
+          "10": "8"
+        },
+        "down": {
+          "1": "6, 7",
+          "2": "5",
+          "4": "8",
+          "5": "7",
+          "6": "5",
+          "7": "5, 5"
         }
       }
     }
