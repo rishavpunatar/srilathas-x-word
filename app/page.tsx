@@ -96,7 +96,6 @@ export default function Home() {
   const [submissionCount, setSubmissionCount] = useState(0);
   const [submission, setSubmission] = useState<Submission | null>(null);
   const [needsWork, setNeedsWork] = useState<Set<string>>(new Set());
-  const [verified, setVerified] = useState<Set<string>>(new Set());
   const [menuOpen, setMenuOpen] = useState(false);
   const [installOpen, setInstallOpen] = useState(false);
   const [helpOpen, setHelpOpen] = useState(false);
@@ -161,6 +160,20 @@ export default function Home() {
     return inDirection ?? entries.find((entry) => entry.cells.includes(selected)) ?? entries[0];
   }, [directionEntries, entries, selected]);
   const activeCells = useMemo(() => new Set(activeEntry?.cells ?? []), [activeEntry]);
+  const correctEntryKeys = useMemo(() => {
+    const keys = new Set<string>();
+    for (const entry of entries) {
+      if (entry.cells.every((cell) => answers[cell] === solution[cell])) keys.add(entryKey(entry));
+    }
+    return keys;
+  }, [answers, entries, solution]);
+  const correctCells = useMemo(() => {
+    const cells = new Set<number>();
+    for (const entry of entries) {
+      if (correctEntryKeys.has(entryKey(entry))) entry.cells.forEach((cell) => cells.add(cell));
+    }
+    return cells;
+  }, [correctEntryKeys, entries]);
   const needsWorkCells = useMemo(() => {
     const cells = new Set<number>();
     for (const entry of entries) {
@@ -226,7 +239,6 @@ export default function Home() {
         setSubmissionCount(0);
       }
       setNeedsWork(new Set());
-      setVerified(new Set());
       setSubmission(null);
       setSelected(firstOpenCell);
       setDirection(entries.find((entry) => entry.cells.includes(firstOpenCell))?.direction ?? "across");
@@ -252,11 +264,6 @@ export default function Home() {
   const clearFeedbackForCell = useCallback((index: number) => {
     const relatedKeys = entries.filter((entry) => entry.cells.includes(index)).map(entryKey);
     setNeedsWork((current) => {
-      const next = new Set(current);
-      relatedKeys.forEach((key) => next.delete(key));
-      return next;
-    });
-    setVerified((current) => {
       const next = new Set(current);
       relatedKeys.forEach((key) => next.delete(key));
       return next;
@@ -385,7 +392,6 @@ export default function Home() {
     const nextSubmissionCount = submissionCount + 1;
     setSubmissionCount(nextSubmissionCount);
     setNeedsWork(incorrectKeys);
-    setVerified(correctKeys);
     if (correct === entries.length) {
       setComplete(true);
       setCompletionOpen(true);
@@ -406,7 +412,6 @@ export default function Home() {
     setCompletionOpen(false);
     setSubmissionCount(0);
     setNeedsWork(new Set());
-    setVerified(new Set());
     setSubmission(null);
     setSelected(firstOpenCell);
     setResetOpen(false);
@@ -500,18 +505,19 @@ export default function Home() {
               if (solutionLetter === "#") return <div className="cell block" key={index} role="presentation" />;
               const isSelected = selected === index;
               const isActive = activeCells.has(index);
+              const isCorrect = correctCells.has(index);
               const requiresWork = needsWorkCells.has(index);
               return (
                 <button
                   key={index}
                   type="button"
                   role="gridcell"
-                  className={`cell ${isActive ? "active" : ""} ${isSelected ? "selected" : ""} ${requiresWork ? "needs-work" : ""}`}
+                  className={`cell ${isActive ? "active" : ""} ${isSelected ? "selected" : ""} ${requiresWork ? "needs-work" : ""} ${isCorrect ? "correct" : ""}`}
                   onClick={(event) => {
                     event.preventDefault();
                     selectCell(index);
                   }}
-                  aria-label={`${numbers.get(index) ? `${numbers.get(index)}, ` : ""}${answers[index] || "blank"}${requiresWork ? ", in an answer that needs another look" : ""}`}
+                  aria-label={`${numbers.get(index) ? `${numbers.get(index)}, ` : ""}${answers[index] || "blank"}${isCorrect ? ", correct" : requiresWork ? ", in an answer that needs another look" : ""}`}
                   aria-selected={isSelected}
                 >
                   {numbers.has(index) && <span className="cell-number">{numbers.get(index)}</span>}
@@ -521,12 +527,13 @@ export default function Home() {
             })}
           </div>
 
-          <div className={activeEntry && needsWork.has(entryKey(activeEntry)) ? "active-clue active-clue-wrong" : "active-clue"} aria-live="polite">
+          <div className={`active-clue ${activeEntry && needsWork.has(entryKey(activeEntry)) ? "active-clue-wrong" : ""} ${activeEntry && correctEntryKeys.has(entryKey(activeEntry)) ? "active-clue-correct" : ""}`} aria-live="polite">
             <button onClick={() => moveToEntry(-1)} aria-label="Previous clue"><Icon name="back" /></button>
             <div>
               <span>{activeEntry?.number} {activeEntry ? directionLabel(activeEntry.direction) : ""} · ({activeEntry?.enumeration})</span>
               <p>{activeEntry?.clue}</p>
               {activeEntry && needsWork.has(entryKey(activeEntry)) && <small>Needs another look — no answer revealed</small>}
+              {activeEntry && correctEntryKeys.has(entryKey(activeEntry)) && <small className="correct-note"><Icon name="check" /> Correct</small>}
             </div>
             <button onClick={() => moveToEntry(1)} aria-label="Next clue"><Icon name="forward" /></button>
           </div>
@@ -562,7 +569,7 @@ export default function Home() {
                 {entries.filter((entry) => entry.direction === clueDirection).map((entry) => {
                   const key = entryKey(entry);
                   const current = activeEntry && key === entryKey(activeEntry);
-                  const status = needsWork.has(key) ? "needs-work" : verified.has(key) ? "verified" : "";
+                  const status = needsWork.has(key) ? "needs-work" : correctEntryKeys.has(key) ? "verified" : "";
                   return (
                     <li key={key}>
                       <button className={`${current ? "current" : ""} ${status}`} onClick={() => selectCell(entry.cells[0], clueDirection)}>
@@ -636,7 +643,7 @@ export default function Home() {
               <button className="icon-button" onClick={() => setHelpOpen(false)} aria-label="Close"><Icon name="close" /></button>
             </div>
             <div className="guide-step"><span>1</span><div><strong>Choose a clue</strong><p>Tap any square or clue. Tap a crossing square again to switch between Across and Down.</p></div></div>
-            <div className="guide-step"><span>2</span><div><strong>Fill the whole grid</strong><p>Your progress and timer save automatically, even if you close the app.</p></div></div>
+            <div className="guide-step"><span>2</span><div><strong>Fill the whole grid</strong><p>A correct answer turns green immediately. Your progress and timer save automatically, even if you close the app.</p></div></div>
             <div className="guide-step"><span>3</span><div><strong>Submit together</strong><p>Once every square is filled, submit the puzzle for a word-level score.</p></div></div>
             <div className="guide-step"><span>4</span><div><strong>Keep trying</strong><p>Incorrect clues are marked, but their answers are never shown. Correct them and submit again.</p></div></div>
             <button className="primary-button" onClick={() => setHelpOpen(false)}>Got it</button>

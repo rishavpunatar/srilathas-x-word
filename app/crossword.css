@@ -247,6 +247,8 @@ h1 {
 .cell.active { background: var(--coral-pale); }
 .cell.needs-work:not(.selected) { background: var(--wrong-pale); color: var(--wrong); }
 .cell.selected { z-index: 1; background: var(--selected); color: white; box-shadow: inset 0 0 0 2px rgba(255,255,255,.55); }
+.cell.correct { background: var(--success-pale); color: #285740; }
+.cell.correct.selected { background: var(--success); color: white; box-shadow: inset 0 0 0 2px rgba(255,255,255,.62); }
 
 .cell-number {
   position: absolute;
@@ -279,6 +281,7 @@ h1 {
 }
 
 .active-clue-wrong { background: #76332f; }
+.active-clue-correct { background: var(--success); }
 
 .active-clue button {
   width: 36px;
@@ -304,6 +307,7 @@ h1 {
 
 .active-clue p { margin: 0; font: 400 13px/1.42 var(--font-serif), Georgia, serif; }
 .active-clue small { display: block; margin-top: 5px; color: #ffd9d3; font-size: 9px; font-weight: 750; }
+.active-clue .correct-note { display: flex; align-items: center; gap: 4px; color: #e8f5ed; letter-spacing: .06em; text-transform: uppercase; }
 
 .submit-area { width: min(100%, 680px); margin: 16px auto 0; text-align: center; }
 .submit-area p { margin: 8px 0 0; color: var(--muted); font-size: 10px; }
@@ -364,6 +368,7 @@ h1 {
 .clue-section button small { color: var(--muted); white-space: nowrap; }
 .clue-section button.current { background: var(--clue); padding-left: 9px; }
 .clue-section button.needs-work { color: var(--wrong); background: var(--wrong-pale); }
+.clue-section button.verified { color: var(--success); background: var(--success-pale); }
 .clue-section button.verified .clue-status { color: var(--success); }
 .clue-status { text-align: center; font-size: 11px; font-weight: 900; }
 .clue-section button.needs-work .clue-status { width: 17px; height: 17px; display: grid; place-items: center; border-radius: 50%; background: var(--wrong); color: white; }
