@@ -481,10 +481,10 @@ export default function Home() {
         <aside className="install-banner">
           <BrandMark />
           <div>
-            <strong>Make this a real iPhone app</strong>
-            <span>In Safari, tap Share, then “Add to Home Screen.”</span>
+            <strong>The full-screen edition</strong>
+            <span>Add Srilatha’s X Word to your Home Screen for a beautifully focused experience.</span>
           </div>
-          <button onClick={() => setInstallOpen(true)}>Show me</button>
+          <button onClick={() => setInstallOpen(true)}>Add to iPhone</button>
         </aside>
       )}
 
@@ -575,7 +575,7 @@ export default function Home() {
 
       <footer>
         <span>{filledCount} of {fillableCount} squares</span>
-        <button onClick={() => setInstallOpen(true)}>Install on iPhone</button>
+        <button onClick={() => setInstallOpen(true)}>Add to iPhone</button>
       </footer>
 
       {paused && (
@@ -600,7 +600,7 @@ export default function Home() {
               <span><strong>1</strong> perfect score</span>
             </div>
             <button className="primary-button" onClick={startPuzzle}>Start crossword</button>
-            {!isStandalone && <button className="text-button" onClick={() => { setWelcomeOpen(false); setInstallOpen(true); }}>Install it first</button>}
+            {!isStandalone && <button className="text-button" onClick={() => { setWelcomeOpen(false); setInstallOpen(true); }}>Add to iPhone</button>}
           </div>
         </div>
       )}
@@ -613,7 +613,7 @@ export default function Home() {
               <button className="icon-button" onClick={() => setMenuOpen(false)} aria-label="Close"><Icon name="close" /></button>
             </div>
             <button className="sheet-action" onClick={() => { setMenuOpen(false); setHelpOpen(true); }}><span>How to play</span><small>Navigation, scoring, and submission</small></button>
-            {!isStandalone && <button className="sheet-action" onClick={() => { setMenuOpen(false); setInstallOpen(true); }}><span>Install on iPhone</span><small>Add the app to the Home Screen</small></button>}
+            {!isStandalone && <button className="sheet-action" onClick={() => { setMenuOpen(false); setInstallOpen(true); }}><span>Add to iPhone</span><small>Enjoy the full-screen Home Screen edition</small></button>}
             <button className="sheet-action" onClick={() => { setMenuOpen(false); setArchiveOpen(true); }}><span>Puzzle archive</span><small>{puzzles.length} puzzle{puzzles.length === 1 ? "" : "s"} available</small></button>
             <button className="sheet-action danger" onClick={() => { setMenuOpen(false); setResetOpen(true); }}><span>Start over</span><small>Clear every answer and reset the timer</small></button>
           </div>
@@ -638,16 +638,16 @@ export default function Home() {
 
       {installOpen && (
         <div className="scrim" onClick={() => setInstallOpen(false)}>
-          <div className="sheet install-sheet" role="dialog" aria-modal="true" aria-label="Install Srilatha’s X Word" onClick={(event) => event.stopPropagation()}>
+          <div className="sheet install-sheet" role="dialog" aria-modal="true" aria-label="Add Srilatha’s X Word to iPhone" onClick={(event) => event.stopPropagation()}>
             <BrandMark large />
             <button className="sheet-close icon-button" onClick={() => setInstallOpen(false)} aria-label="Close"><Icon name="close" /></button>
-            <p className="eyebrow">One-time setup</p>
-            <h2>Put Srilatha’s X Word on your iPhone</h2>
+            <p className="eyebrow">The full-screen edition</p>
+            <h2>Keep Srilatha’s X Word close</h2>
             <div className="install-step"><span>1</span><p>Open this link in <strong>Safari</strong>.</p></div>
             <div className="install-step"><span>2</span><p>Tap the <strong>Share</strong> icon at the bottom of Safari.</p></div>
             <div className="install-step"><span>3</span><p>Scroll down and choose <strong>Add to Home Screen</strong>.</p></div>
             <div className="install-step"><span>4</span><p>Tap <strong>Add</strong>. The X Word icon will appear with your other apps.</p></div>
-            <p className="install-footnote">Future crosswords arrive inside the app automatically. There is nothing else to download.</p>
+            <p className="install-footnote">New crosswords arrive automatically whenever the app opens—no updates or redownloads required.</p>
           </div>
         </div>
       )}
