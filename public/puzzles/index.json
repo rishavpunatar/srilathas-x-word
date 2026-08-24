@@ -1,5 +1,5 @@
 {
-  "version": "2026-08-24.2",
+  "version": "2026-08-24.3",
   "puzzles": [
     {
       "id": "handle-with-urgent-care-001",
@@ -10,51 +10,62 @@
       "note": "Ten clues. Every one comes with a story.",
       "completionMessage": "Discharged with full marks. You handled that with care. ♥",
       "grid": [
-        "#############S#P",
-        "#####SUPERFICIAL",
-        "#M###########M#A",
-        "#I#F##P######P#T",
-        "#S#A##I###K##L#O",
-        "#T#C##Z###E##Y##",
-        "#B#U##Z###V##C##",
-        "WORLDWARSNAPBOX#",
-        "#R#T######L##O##",
-        "#N#Y######B##K##",
-        "##########H##I##",
-        "#CAMBRIDGEAVENUE",
-        "##########T##G##",
-        "###PREGNANT#####"
+        "###S###############",
+        "###U###############",
+        "###P###############",
+        "###E#####M#########",
+        "###R#####I#########",
+        "###F#####S###K#####",
+        "#P#I##P##T###E#####",
+        "#L#C##I##B###V#####",
+        "#A#I##Z##O##FACULTY",
+        "#T#A##Z##R###L#####",
+        "WORLDWARSNACKBOX###",
+        "########I##A#H#####",
+        "########M##M#A#####",
+        "########P##B#T#####",
+        "########L##R#T#####",
+        "########Y##I#######",
+        "########C##D#######",
+        "########O##G#######",
+        "########O##E#######",
+        "########K##A#######",
+        "########I##V#######",
+        "########N##E#######",
+        "#####PREGNANT######",
+        "###########U#######",
+        "###########E#######"
       ],
       "clues": {
         "across": {
-          "3": "Ironically, her imitation of this word lacks depth",
-          "8": "Apparently, soldiers ate from these between battles",
-          "9": "Our own little bit of university town, nowhere near the university",
+          "6": "A place where intelligence is both the product and the prerequisite",
+          "7": "Apparently, soldiers ate from these between battles",
           "10": "Apparently a possible explanation for any bodily sensation whatsoever"
         },
         "down": {
-          "1": "The culinary channel from a parallel universe",
-          "2": "He turned ‘because the gods said so’ into a 2,400-year argument",
-          "4": "A shared journey beneath a red sun",
-          "5": "A place where intelligence is both the product and the prerequisite",
-          "6": "Three weeks proved there really can be too much of a good thing",
-          "7": "Dad’s unexpected contribution to the priesthood"
+          "1": "Ironically, her imitation of this word lacks depth",
+          "2": "A shared journey beneath a red sun",
+          "3": "Dad’s unexpected contribution to the priesthood",
+          "4": "He turned ‘because the gods said so’ into a 2,400-year argument",
+          "5": "Three weeks proved there really can be too much of a good thing",
+          "8": "The culinary channel from a parallel universe",
+          "9": "Our own little bit of university town, nowhere near the university"
         }
       },
       "enumerations": {
         "across": {
-          "3": "11",
-          "8": "5, 3, 4, 3",
-          "9": "9, 6",
+          "6": "7",
+          "7": "5, 3, 5, 3",
           "10": "8"
         },
         "down": {
-          "1": "6, 7",
-          "2": "5",
-          "4": "8",
-          "5": "7",
-          "6": "5",
-          "7": "5, 5"
+          "1": "11",
+          "2": "8",
+          "3": "5, 5",
+          "4": "5",
+          "5": "5",
+          "8": "6, 7",
+          "9": "9, 6"
         }
       }
     }
