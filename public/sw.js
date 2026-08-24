@@ -1,4 +1,4 @@
-const CACHE = "srilathas-x-word-v5";
+const CACHE = "srilathas-x-word-v6";
 const BASE = new URL(self.registration.scope).pathname.replace(/\/$/, "");
 const SHELL = [`${BASE}/`, `${BASE}/manifest.webmanifest`, `${BASE}/icon-192.png`, `${BASE}/icon-512.png`];
 
@@ -17,6 +17,19 @@ self.addEventListener("activate", (event) => {
 self.addEventListener("fetch", (event) => {
   const requestUrl = new URL(event.request.url);
   if (event.request.method !== "GET" || requestUrl.origin !== self.location.origin) return;
+
+  if (event.request.mode === "navigate") {
+    event.respondWith(
+      fetch(event.request)
+        .then((response) => {
+          const copy = response.clone();
+          caches.open(CACHE).then((cache) => cache.put(`${requestUrl.origin}${BASE}/`, copy));
+          return response;
+        })
+        .catch(() => caches.match(`${requestUrl.origin}${BASE}/`)),
+    );
+    return;
+  }
 
   if (requestUrl.pathname.includes("/puzzles/")) {
     event.respondWith(

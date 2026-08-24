@@ -182,7 +182,7 @@ export default function Home() {
       .catch(() => undefined);
 
     if ("serviceWorker" in navigator && !["localhost", "127.0.0.1"].includes(window.location.hostname)) {
-      navigator.serviceWorker.register(`${appBasePath}/sw.js`).catch(() => undefined);
+      navigator.serviceWorker.register(`${appBasePath}/sw.js`, { updateViaCache: "none" }).catch(() => undefined);
     }
 
     const standalone = window.matchMedia("(display-mode: standalone)").matches ||
