@@ -51,12 +51,16 @@ button:focus-visible, input:focus-visible { outline: 3px solid rgba(220, 85, 77,
 
 .keyboard-capture {
   position: fixed;
-  left: -10px;
-  bottom: 0;
+  left: 50%;
+  top: 50%;
   width: 1px;
   height: 1px;
-  opacity: .01;
+  padding: 0;
+  border: 0;
+  opacity: 0;
+  font-size: 16px;
   pointer-events: none;
+  transform: translate(-50%, -50%);
 }
 
 .topbar {

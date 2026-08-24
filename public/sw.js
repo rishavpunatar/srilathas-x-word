@@ -1,4 +1,4 @@
-const CACHE = "srilathas-x-word-v4";
+const CACHE = "srilathas-x-word-v5";
 const BASE = new URL(self.registration.scope).pathname.replace(/\/$/, "");
 const SHELL = [`${BASE}/`, `${BASE}/manifest.webmanifest`, `${BASE}/icon-192.png`, `${BASE}/icon-512.png`];
 

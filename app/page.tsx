@@ -264,6 +264,10 @@ export default function Home() {
     setSubmission(null);
   }, [entries]);
 
+  const focusKeyboard = useCallback(() => {
+    if (!complete) inputRef.current?.focus({ preventScroll: true });
+  }, [complete]);
+
   const changeDirection = useCallback((nextDirection: Direction) => {
     setDirection(nextDirection);
     const currentEntry = entries.find((entry) => entry.direction === nextDirection && entry.cells.includes(selected));
@@ -271,8 +275,8 @@ export default function Home() {
       const firstEntry = entries.find((entry) => entry.direction === nextDirection);
       if (firstEntry) setSelected(firstEntry.cells[0]);
     }
-    window.setTimeout(() => inputRef.current?.focus(), 0);
-  }, [entries, selected]);
+    focusKeyboard();
+  }, [entries, focusKeyboard, selected]);
 
   const selectCell = useCallback((index: number, requestedDirection?: Direction) => {
     if (solution[index] === "#") return;
@@ -290,8 +294,8 @@ export default function Home() {
       }
     }
     setSelected(index);
-    window.setTimeout(() => inputRef.current?.focus(), 0);
-  }, [direction, entries, selected, solution]);
+    focusKeyboard();
+  }, [direction, entries, focusKeyboard, selected, solution]);
 
   const moveWithinEntry = useCallback((delta: number) => {
     if (!activeEntry) return;
@@ -306,7 +310,8 @@ export default function Home() {
     const position = list.findIndex((entry) => entry.number === activeEntry.number && entry.direction === activeEntry.direction);
     const next = list[(Math.max(position, 0) + delta + list.length) % list.length];
     setSelected(next.cells[0]);
-  }, [activeEntry, direction, entries]);
+    focusKeyboard();
+  }, [activeEntry, direction, entries, focusKeyboard]);
 
   const enterLetter = useCallback((letter: string) => {
     if (!/^[a-z]$/i.test(letter) || solution[selected] === "#") return;
@@ -409,8 +414,8 @@ export default function Home() {
 
   const startPuzzle = () => {
     localStorage.setItem("srilathas-x-word:welcomed", "true");
+    focusKeyboard();
     setWelcomeOpen(false);
-    window.setTimeout(() => inputRef.current?.focus(), 120);
   };
 
   const shareScore = async () => {
@@ -502,7 +507,10 @@ export default function Home() {
                   type="button"
                   role="gridcell"
                   className={`cell ${isActive ? "active" : ""} ${isSelected ? "selected" : ""} ${requiresWork ? "needs-work" : ""}`}
-                  onClick={() => selectCell(index)}
+                  onClick={(event) => {
+                    event.preventDefault();
+                    selectCell(index);
+                  }}
                   aria-label={`${numbers.get(index) ? `${numbers.get(index)}, ` : ""}${answers[index] || "blank"}${requiresWork ? ", in an answer that needs another look" : ""}`}
                   aria-selected={isSelected}
                 >
