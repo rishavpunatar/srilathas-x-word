@@ -424,7 +424,7 @@ export default function Home() {
   };
 
   const shareScore = async () => {
-    const text = `Srilatha’s X Word · No. ${puzzle.number}\n10/10 · ${formatTime(elapsed)}\nHandle with Urgent Care`;
+    const text = `Srilatha’s X Word · No. ${puzzle.number}\n10/10 · ${formatTime(elapsed)}\n${puzzle.title}`;
     if (navigator.share) {
       await navigator.share({ title: "Srilatha’s X Word", text }).catch(() => undefined);
     } else {

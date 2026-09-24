@@ -17,6 +17,24 @@ const urgentCareEntries = new Map([
   ["PLATO", { enumeration: "5", clue: "He turned ‘because the gods said so’ into a 2,400-year argument" }],
 ]);
 
+const birthdayEntries = new Map([
+  ["SANSAAR", { enumeration: "7", clue: "Where the fruit seems to have ripened." }],
+  ["HAMILTON", { enumeration: "8", clue: "Proof that fiscal policy can have surprisingly good flow." }],
+  ["EALINGROAD", { enumeration: "6, 4", clue: "Where ‘one quick look’ repeatedly became an afternoon." }],
+  ["KEWGARDENS", { enumeration: "3, 7", clue: "The place that made Monet look restrained." }],
+  ["TWELFTHNIGHT", { enumeration: "7, 5", clue: "The first time we let the Bard third-wheel." }],
+  ["MEHENDI", { enumeration: "7", clue: "A hidden talent discovered precisely when there was no backup plan." }],
+  ["PAINTER", { enumeration: "7", clue: "A future identity currently drying." }],
+  ["BADASS", { enumeration: "6", clue: "Her professional reputation has now escaped the office." }],
+  ["GARBA", { enumeration: "5", clue: "The rare case where going round in circles counts as progress." }],
+  ["INDIA", { enumeration: "5", clue: "The adventure currently trapped behind a desk somewhere." }],
+]);
+
+const expectedPuzzles = new Map([
+  ["handle-with-urgent-care-001", urgentCareEntries],
+  ["happy-birthday-chubloo-002", birthdayEntries],
+]);
+
 for (const puzzle of feed.puzzles) {
   const rows = puzzle.grid.length;
   const cols = puzzle.grid[0]?.length ?? 0;
@@ -36,29 +54,36 @@ for (const puzzle of feed.puzzles) {
       if (startsAcross || startsDown) number += 1;
       if (startsAcross) {
         let answer = "";
-        for (let cursor = index; cursor < (row + 1) * cols && solution[cursor] !== "#"; cursor += 1) answer += solution[cursor];
-        entries.push({ number, direction: "across", answer });
+        const cells = [];
+        for (let cursor = index; cursor < (row + 1) * cols && solution[cursor] !== "#"; cursor += 1) {
+          answer += solution[cursor];
+          cells.push(cursor);
+        }
+        entries.push({ number, direction: "across", answer, cells });
       }
       if (startsDown) {
         let answer = "";
-        for (let cursor = index; cursor < solution.length && solution[cursor] !== "#"; cursor += cols) answer += solution[cursor];
-        entries.push({ number, direction: "down", answer });
+        const cells = [];
+        for (let cursor = index; cursor < solution.length && solution[cursor] !== "#"; cursor += cols) {
+          answer += solution[cursor];
+          cells.push(cursor);
+        }
+        entries.push({ number, direction: "down", answer, cells });
       }
     }
   }
 
-  const expectedEntries = puzzle.id === "handle-with-urgent-care-001" ? urgentCareEntries : null;
-  assert.equal(entries.length, expectedEntries?.size ?? 10, `${puzzle.id}: expected exactly ten answer entries`);
+  const expectedEntries = expectedPuzzles.get(puzzle.id);
+  assert.ok(expectedEntries, `${puzzle.id}: puzzle has no exact answer specification`);
+  assert.equal(entries.length, expectedEntries.size, `${puzzle.id}: expected exactly ten answer entries`);
   for (const entry of entries) {
     const key = String(entry.number);
     assert.ok(puzzle.clues[entry.direction]?.[key], `${puzzle.id}: missing ${entry.number} ${entry.direction} clue`);
     assert.ok(puzzle.enumerations[entry.direction]?.[key], `${puzzle.id}: missing ${entry.number} ${entry.direction} enumeration`);
-    if (expectedEntries) {
-      const expected = expectedEntries.get(entry.answer);
-      assert.ok(expected, `${puzzle.id}: unexpected or misspelled answer ${entry.answer}`);
-      assert.equal(puzzle.clues[entry.direction][key], expected.clue, `${puzzle.id}: clue does not match ${entry.answer}`);
-      assert.equal(puzzle.enumerations[entry.direction][key], expected.enumeration, `${puzzle.id}: enumeration does not match ${entry.answer}`);
-    }
+    const expected = expectedEntries.get(entry.answer);
+    assert.ok(expected, `${puzzle.id}: unexpected or misspelled answer ${entry.answer}`);
+    assert.equal(puzzle.clues[entry.direction][key], expected.clue, `${puzzle.id}: clue does not match ${entry.answer}`);
+    assert.equal(puzzle.enumerations[entry.direction][key], expected.enumeration, `${puzzle.id}: enumeration does not match ${entry.answer}`);
     const enumeratedLength = puzzle.enumerations[entry.direction][key]
       .split(",")
       .reduce((total, part) => total + Number(part.trim()), 0);
@@ -82,6 +107,19 @@ for (const puzzle of feed.puzzles) {
     }
   }
   assert.equal(visited.size, openCells.length, `${puzzle.id}: all answers must form one connected crossword`);
+
+  if (puzzle.id === "happy-birthday-chubloo-002") {
+    const cellUse = new Map();
+    for (const entry of entries) {
+      for (const cell of entry.cells) cellUse.set(cell, (cellUse.get(cell) ?? 0) + 1);
+    }
+    const crossingCells = [...cellUse.values()].filter((uses) => uses === 2).length;
+    assert.ok(crossingCells >= 12, `${puzzle.id}: expected at least twelve genuine crossings, found ${crossingCells}`);
+    for (const entry of entries) {
+      const entryCrossings = entry.cells.filter((cell) => cellUse.get(cell) === 2).length;
+      assert.ok(entryCrossings >= 2, `${puzzle.id}: ${entry.answer} should cross at least two other answers`);
+    }
+  }
 }
 
-console.log(`Validated ${feed.puzzles.length} puzzle with 10 connected answers.`);
+console.log(`Validated ${feed.puzzles.length} puzzles with 10 connected answers each.`);

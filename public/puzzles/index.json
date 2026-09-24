@@ -1,6 +1,61 @@
 {
-  "version": "2026-08-24.3",
+  "version": "2026-09-24.1",
   "puzzles": [
+    {
+      "id": "happy-birthday-chubloo-002",
+      "number": 2,
+      "title": "Happy Birthday Chubloo",
+      "date": "Puzzle No. 2",
+      "author": "Made for Srilatha",
+      "note": "Ten clues, twelve crossings, and a very happy birthday.",
+      "completionMessage": "Happy birthday, Chubloo. Another year, completely crossed off. ♥",
+      "grid": [
+        "##K##I########",
+        "#MEHENDI######",
+        "##W##D###E####",
+        "##G##I##BADASS",
+        "#GARBA#P#L###A",
+        "##R###HAMILTON",
+        "##D####I#N###S",
+        "TWELFTHNIGHT#A",
+        "##N####T#R###A",
+        "##S####E#O###R",
+        "#######R#A####",
+        "#########D####"
+      ],
+      "clues": {
+        "across": {
+          "3": "A hidden talent discovered precisely when there was no backup plan.",
+          "5": "Her professional reputation has now escaped the office.",
+          "7": "The rare case where going round in circles counts as progress.",
+          "9": "Proof that fiscal policy can have surprisingly good flow.",
+          "10": "The first time we let the Bard third-wheel."
+        },
+        "down": {
+          "1": "The place that made Monet look restrained.",
+          "2": "The adventure currently trapped behind a desk somewhere.",
+          "4": "Where ‘one quick look’ repeatedly became an afternoon.",
+          "6": "Where the fruit seems to have ripened.",
+          "8": "A future identity currently drying."
+        }
+      },
+      "enumerations": {
+        "across": {
+          "3": "7",
+          "5": "6",
+          "7": "5",
+          "9": "8",
+          "10": "7, 5"
+        },
+        "down": {
+          "1": "3, 7",
+          "2": "5",
+          "4": "6, 4",
+          "6": "7",
+          "8": "7"
+        }
+      }
+    },
     {
       "id": "handle-with-urgent-care-001",
       "number": 1,
