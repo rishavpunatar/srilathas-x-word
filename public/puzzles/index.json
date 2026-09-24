@@ -1,5 +1,5 @@
 {
-  "version": "2026-09-24.1",
+  "version": "2026-09-24.2",
   "puzzles": [
     {
       "id": "happy-birthday-chubloo-002",
@@ -34,7 +34,7 @@
         "down": {
           "1": "The place that made Monet look restrained.",
           "2": "The adventure currently trapped behind a desk somewhere.",
-          "4": "Where ‘one quick look’ repeatedly became an afternoon.",
+          "4": "Where one trip became far too many.",
           "6": "Where the fruit seems to have ripened.",
           "8": "A future identity currently drying."
         }

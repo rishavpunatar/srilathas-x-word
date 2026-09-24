@@ -20,7 +20,7 @@ const urgentCareEntries = new Map([
 const birthdayEntries = new Map([
   ["SANSAAR", { enumeration: "7", clue: "Where the fruit seems to have ripened." }],
   ["HAMILTON", { enumeration: "8", clue: "Proof that fiscal policy can have surprisingly good flow." }],
-  ["EALINGROAD", { enumeration: "6, 4", clue: "Where ‘one quick look’ repeatedly became an afternoon." }],
+  ["EALINGROAD", { enumeration: "6, 4", clue: "Where one trip became far too many." }],
   ["KEWGARDENS", { enumeration: "3, 7", clue: "The place that made Monet look restrained." }],
   ["TWELFTHNIGHT", { enumeration: "7, 5", clue: "The first time we let the Bard third-wheel." }],
   ["MEHENDI", { enumeration: "7", clue: "A hidden talent discovered precisely when there was no backup plan." }],
